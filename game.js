@@ -200,6 +200,14 @@ let combat = null;
 /* =========================================================
    EDIFICIOS
 ========================================================= */
+const SUPABASE_URL = "https://puzkchciffrfnhjpxgkk.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_s5D_QAmZswrM-PCFiXYmGg_0cD4ufrS";
+
+const supabase = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+};
 
 const BUILDINGS = {
 
