@@ -1,40 +1,213 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>Frontier Ashes</title>
-<link rel="stylesheet" href="style.css">
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="
+            width=device-width,
+            initial-scale=1.0,
+            maximum-scale=1.0,
+            user-scalable=no,
+            viewport-fit=cover
+        "
+    >
+
+    <meta
+        name="theme-color"
+        content="#101513"
+    >
+
+    <title>Frontier Ashes</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 <body>
-<canvas id="game"></canvas>
 
-<div id="hud">
-  <div class="status">
-    <div><span>VIDA</span><b id="hp">100</b></div>
-    <div><span>HAMBRE</span><b id="food">100</b></div>
-    <div><span>SED</span><b id="water">100</b></div>
-  </div>
-  <div class="topbar">
-    <button id="inventoryBtn">INVENTARIO</button>
-    <button id="craftBtn">FABRICAR</button>
-    <button id="buildBtn">CONSTRUIR</button>
-  </div>
-  <div id="hotbar"></div>
-  <div id="hint"></div>
-</div>
+    <!-- =====================================================
+         CANVAS PRINCIPAL
+    ====================================================== -->
 
-<div id="touchControls">
-  <div id="joystick"><div id="stick"></div></div>
-  <button id="attackBtn">ATACAR</button>
-  <button id="interactBtn">USAR</button>
-</div>
+    <canvas id="game"></canvas>
 
-<div id="panel" class="hidden">
-  <div class="panelHead"><h2 id="panelTitle"></h2><button id="closePanel">×</button></div>
-  <div id="panelBody"></div>
-</div>
 
-<script src="js/game.js"></script>
+    <!-- =====================================================
+         HUD
+    ====================================================== -->
+
+    <div id="hud">
+
+        <!-- ESTADÍSTICAS DEL JUGADOR -->
+
+        <div class="status">
+
+            <div class="stat health">
+
+                <span>VIDA</span>
+
+                <b id="hp">
+                    100
+                </b>
+
+            </div>
+
+
+            <div class="stat food">
+
+                <span>HAMBRE</span>
+
+                <b id="food">
+                    100
+                </b>
+
+            </div>
+
+
+            <div class="stat water">
+
+                <span>SED</span>
+
+                <b id="water">
+                    100
+                </b>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             BOTONES SUPERIORES
+        ================================================== -->
+
+        <div class="topbar">
+
+            <button
+                id="inventoryBtn"
+                type="button"
+            >
+                INVENTARIO
+            </button>
+
+
+            <button
+                id="craftBtn"
+                type="button"
+            >
+                FABRICAR
+            </button>
+
+
+            <button
+                id="buildBtn"
+                type="button"
+            >
+                CONSTRUIR
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             BARRA DE ACCESO RÁPIDO
+        ================================================== -->
+
+        <div id="hotbar"></div>
+
+
+        <!-- =================================================
+             MENSAJES DEL JUEGO
+        ================================================== -->
+
+        <div id="hint"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CONTROLES TÁCTILES
+    ====================================================== -->
+
+    <div id="touchControls">
+
+
+        <!-- JOYSTICK -->
+
+        <div id="joystick">
+
+            <div id="stick"></div>
+
+        </div>
+
+
+        <!-- BOTÓN ATAQUE -->
+
+        <button
+            id="attackBtn"
+            type="button"
+        >
+            ATACAR
+        </button>
+
+
+        <!-- BOTÓN INTERACTUAR -->
+
+        <button
+            id="interactBtn"
+            type="button"
+        >
+            USAR
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         PANEL
+    ====================================================== -->
+
+    <div
+        id="panel"
+        class="hidden"
+    >
+
+        <div class="panelHead">
+
+            <h2 id="panelTitle">
+                Panel
+            </h2>
+
+
+            <button
+                id="closePanel"
+                type="button"
+                aria-label="Cerrar"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div id="panelBody"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="js/game.js"></script>
+
 </body>
+
 </html>
