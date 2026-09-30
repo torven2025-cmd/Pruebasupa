@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Frontier Ashes</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<div id="hud">
+  <div class="status">
+    <div><span>VIDA</span><b id="hp">100</b></div>
+    <div><span>HAMBRE</span><b id="food">100</b></div>
+    <div><span>SED</span><b id="water">100</b></div>
+  </div>
+  <div class="topbar">
+    <button id="inventoryBtn">INVENTARIO</button>
+    <button id="craftBtn">FABRICAR</button>
+    <button id="buildBtn">CONSTRUIR</button>
+  </div>
+  <div id="hotbar"></div>
+  <div id="hint"></div>
+</div>
+
+<div id="touchControls">
+  <div id="joystick"><div id="stick"></div></div>
+  <button id="attackBtn">ATACAR</button>
+  <button id="interactBtn">USAR</button>
+</div>
+
+<div id="panel" class="hidden">
+  <div class="panelHead"><h2 id="panelTitle"></h2><button id="closePanel">×</button></div>
+  <div id="panelBody"></div>
+</div>
+
+<script src="js/game.js"></script>
+</body>
+</html>
