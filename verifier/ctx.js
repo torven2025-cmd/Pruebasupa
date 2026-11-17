@@ -1,0 +1,27 @@
+const vm=require('vm');
+function make(code){
+  function mkStub(){const f=function(){};const P=new Proxy(f,{get(t,k){if(k===Symbol.toPrimitive)return()=>0;if(k==='then'||k===Symbol.iterator)return undefined;if(k==='length')return 0;if(k==='style'||k==='dataset'||k==='classList'||k==='children'||k==='attributes')return mk2();return mkStub()},set(){return true},apply(){return mkStub()},construct(){return mkStub()},has(){return true}});return P}
+  function mk2(){return new Proxy({},{get(t,k){if(k===Symbol.toPrimitive)return()=>'';return typeof k=='string'&&/^(add|remove|toggle|contains|setProperty|getPropertyValue)$/.test(k)?()=>false:''},set(){return true}})}
+  const ctx2d=new Proxy({},{get(t,k){if(k==='canvas')return cv;if(k==='measureText')return()=>({width:10});if(k==='getImageData')return()=>({data:new Uint8ClampedArray(4)});if(k==='createLinearGradient'||k==='createRadialGradient'||k==='createPattern')return()=>({addColorStop(){}});if(k==='getTransform')return()=>({a:1,d:1,e:0,f:0});return typeof k=='string'?()=>{}:undefined},set(){return true}});
+  const cv={width:800,height:600,style:{},getContext:()=>ctx2d,addEventListener(){},getBoundingClientRect:()=>({left:0,top:0,width:800,height:600}),toDataURL:()=>'',classList:mk2(),setAttribute(){},appendChild(){},parentNode:null,clientWidth:800,clientHeight:600,parentElement:{clientWidth:800,clientHeight:600,style:{}}};
+  const AL=()=>[el(),el(),el()];
+  const el=()=>{const o0=el0();return new Proxy(o0,{get(t,k){if(k in t)return t[k];if(k===Symbol.toPrimitive)return()=>'';if(typeof k!='string'||k==='then')return undefined;if(/^(on[a-z]+)$/.test(k))return null;return()=>el()},set(t,k,v){t[k]=v;return true}})};
+  const el0=()=>{const o={style:mk2(),dataset:{},classList:mk2(),get children(){return AL()},get firstElementChild(){return el()},get lastElementChild(){return el()},get nextElementSibling(){return null},get previousElementSibling(){return null},get childNodes(){return AL()},addEventListener(){},removeEventListener(){},appendChild(){},removeChild(){},remove(){},setAttribute(){},getAttribute(){return null},querySelector:()=>el(),querySelectorAll:AL,getContext:()=>ctx2d,getBoundingClientRect:()=>({left:0,top:0,width:800,height:600}),insertAdjacentHTML(){},focus(){},click(){},innerHTML:'',textContent:'',value:'',width:300,height:300,clientWidth:300,clientHeight:300,offsetWidth:300,offsetHeight:300,parentNode:null,closest:()=>null,contains:()=>false,cloneNode:()=>el(),animate:()=>({}),toDataURL:()=>''};return o};
+  const doc={getElementById:id=>id=='c'?cv:el(),createElement:t=>t=='canvas'?{...cv,getContext:()=>ctx2d}:el(),querySelector:()=>el(),querySelectorAll:AL,addEventListener(){},removeEventListener(){},body:el(),head:el(),documentElement:el(),hidden:false,fonts:{ready:Promise.resolve(),load(){return Promise.resolve()}},createTextNode:()=>el(),createDocumentFragment:()=>el(),createTreeWalker:()=>({nextNode:()=>false,currentNode:null}),visibilityState:'visible'};
+  const ls={};const sandbox={document:doc,localStorage:{getItem:k=>ls[k]??null,setItem:(k,v)=>{ls[k]=String(v)},removeItem:k=>{delete ls[k]}},sessionStorage:{getItem:()=>null,setItem(){},removeItem(){}},
+   navigator:{userAgent:'node',language:'es',languages:['es'],maxTouchPoints:0,clipboard:{},hardwareConcurrency:4,vibrate(){}},location:{href:'http://x/',search:'',hash:'',hostname:'x',protocol:'http:',reload(){}},
+   innerWidth:800,innerHeight:600,devicePixelRatio:1,screen:{width:800,height:600},history:{replaceState(){},pushState(){}},
+   requestAnimationFrame(){return 1},cancelAnimationFrame(){},setTimeout:(f,t)=>0,setInterval:()=>0,clearTimeout(){},clearInterval(){},
+   Image:function(){return el()},Audio:function(){return el()},AudioContext:function(){return mkStub()},webkitAudioContext:function(){return mkStub()},ResizeObserver:function(){return{observe(){},disconnect(){}}},MutationObserver:function(){return{observe(){},disconnect(){}}},IntersectionObserver:function(){return{observe(){},disconnect(){}}},
+   fetch:()=>Promise.reject(new Error('no net')),XMLHttpRequest:function(){return mkStub()},matchMedia:()=>({matches:false,addEventListener(){},addListener(){}}),getComputedStyle:()=>mk2(),
+   addEventListener(){},removeEventListener(){},dispatchEvent(){},Path2D:function(){return mkStub()},OffscreenCanvas:function(){return cv},Worker:function(){return mkStub()},Blob:function(){return{}},URL:{createObjectURL:()=>'',revokeObjectURL(){}},
+   console:{log(){},warn(){},error:(...a)=>{if(process.env.V)console.error(...a)},info(){},debug(){}},performance:{now:()=>Date.now()},Event:function(){},CustomEvent:function(){},KeyboardEvent:function(){},
+   supabase:undefined,alert(){},confirm(){return true},prompt(){return null},open(){},close(){},scrollTo(){},getSelection:()=>({}),atob:s=>Buffer.from(s,'base64').toString('binary'),btoa:s=>Buffer.from(s,'binary').toString('base64')};
+  sandbox.NodeFilter={SHOW_TEXT:4,FILTER_ACCEPT:1,FILTER_REJECT:2};sandbox.HTMLElement=function(){};sandbox.Element=function(){};sandbox.Node=function(){};sandbox.DOMParser=function(){return{parseFromString:()=>doc}};sandbox.TextDecoder=TextDecoder;sandbox.TextEncoder=TextEncoder;sandbox.Uint8Array=Uint8Array;
+  sandbox.window=sandbox;sandbox.self=sandbox;sandbox.globalThis=sandbox;sandbox.top=sandbox;sandbox.parent=sandbox;
+  const c=vm.createContext(sandbox);
+  
+  let err=null;try{vm.runInContext(code,c,{filename:'sim.js'})}catch(e){err=e.message}
+  return {c,vm,err}
+}
+module.exports={make};
